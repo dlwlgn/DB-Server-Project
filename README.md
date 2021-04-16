@@ -80,7 +80,7 @@ void rd() {
 		//클라이언트가 보내온 문자열을 파싱
 		char *ptr = strtok(readbuf, "\n");
 		char *ptr2 = strtok(ptr, " ");
-    //save 명령어가 왔을 때
+    		//save 명령어가 왔을 때
 		if (strcmp(ptr2, "save") == 0) {
 			write(new_fd, "SAVE OK", 7);
 			int flag = 0, line = 0, search = 0;
@@ -116,7 +116,7 @@ void rd() {
 			else fputs(keyvalue, p_file);
 			fclose(p_file);
 		}
-    //read 명령어가 왔을 때
+    		//read 명령어가 왔을 때
 		else if (strcmp(ptr2, "read") == 0) {
 			ptr2 = strtok(NULL, " ");
 			strcpy(key, ptr2);
@@ -130,19 +130,19 @@ void rd() {
 				}
 			}
 		}
-    //clear 명령어가 왔을 때
+    		//clear 명령어가 왔을 때
 		else if (strcmp(ptr2, "clear") == 0) {
 			write(new_fd, "CLEAR OK", 8);
 			FILE *p_file2 = fopen("db_temp.txt", "w");
 			fclose(p_file2);
 			system("mv db_temp.txt db.txt");
 		}
-    //exit 명령어가 왔을 때
+    		//exit 명령어가 왔을 때
 		else if (strcmp(ptr2, "exit") == 0) {
 			write(new_fd, "Client Shut Down", 16);
 			shutdown(new_fd, SHUT_WR);
 		}
-    //
+    		//잘못된 명령어가 
 		else write(new_fd, "Wrong Command", 13);
 
 		sleep(1);
